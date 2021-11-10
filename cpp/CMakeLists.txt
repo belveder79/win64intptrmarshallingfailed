@@ -1,0 +1,32 @@
+project(DLLcpp)
+
+# Cmake needs some version information
+CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
+
+option(BUILD_EXECUTABLE "On or off" OFF)
+
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
+#=======================================
+# USER DEFINED VARIABLES
+
+IF(NOT CMAKE_BUILD_TYPE)
+	MESSAGE(STATUS "CMAKE_BUILD_TYPE was not specified. Building Debug Version.")
+	SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+#==========================================================
+
+INCLUDE_DIRECTORIES(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+FILE(GLOB CppSrc ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+FILE(GLOB CppHdr ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+ADD_LIBRARY(cppdll SHARED ${CppSrc} ${CppHdr})
+SET_TARGET_PROPERTIES(cppdll PROPERTIES
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../cscb/Assets/"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../cscb/Assets/"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../cscb/Assets/"
+)
