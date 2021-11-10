@@ -18,5 +18,5 @@ typedef bool(STDCALL* callBack)(const void* bufPtr, const int32_t offset, const 
 
 extern "C"
 {
-    DECLDIR bool STDCALL LoopBackCbWithBuffer(void* callback, const void* outputBufPtr, const int32_t bufferSize);
+    DECLDIR bool STDCALL LoopBackCbWithBuffer(void* callback, void* outputBufPtr, const int32_t bufferSize);
 }
